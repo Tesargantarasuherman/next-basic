@@ -2,7 +2,7 @@ import Layout from "../../components/Layout";
 
 const userDetail = () => {
     return (
-        <Layout>
+        <Layout pageTitle="User Detail">
             User Details
         </Layout>
     );

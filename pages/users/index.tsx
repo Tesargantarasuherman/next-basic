@@ -2,7 +2,7 @@ import Layout from '../../components/Layout';
 
 const indexUsers = () => {
     return (
-        <Layout>
+        <Layout pageTitle="Users">
             index user
         </Layout>
     );
