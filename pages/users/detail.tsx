@@ -1,9 +1,10 @@
+import Layout from "../../components/Layout";
 
 const userDetail = () => {
     return (
-        <div>
+        <Layout>
             User Details
-        </div>
+        </Layout>
     );
 }
 

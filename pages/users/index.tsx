@@ -1,10 +1,10 @@
-import React from 'react';
+import Layout from '../../components/Layout';
 
 const indexUsers = () => {
     return (
-        <div>
-            index usere
-        </div>
+        <Layout>
+            index user
+        </Layout>
     );
 }
 

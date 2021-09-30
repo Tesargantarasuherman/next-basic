@@ -1,10 +1,13 @@
 import type { NextPage } from 'next';
-import Header  from '../components/Header';
+import Layout from '../components/Layout';
+import React from 'react';
 
 const Home: NextPage = () => {
   return (
     <>
-      <Header />
+      <Layout>
+      <h1>Tesar Gantara</h1>
+      </Layout >
     </>
   )
 }
