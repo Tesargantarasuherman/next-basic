@@ -1,17 +1,18 @@
 import Link from 'next/link';
+import styles from './Header.module.css';
 
 const Header = () => {
   return (
     <div>
-      <header>
-        <ul>
-          <li>
+      <header className={styles.container}>
+        <ul className={styles.list}>
+          <li className={styles.item}>
             <Link href="/blog"> Blog</Link>
           </li>
-          <li>
+          <li className={styles.item}>
             <Link href="/users">User</Link>
           </li>
-          <li>
+          <li className={styles.item}>
             <Link href="">Blog</Link>
           </li>
         </ul>
