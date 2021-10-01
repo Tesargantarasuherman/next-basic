@@ -14,7 +14,7 @@ const indexUsers = (props:UserProps) => {
         <Layout pageTitle="Users">
             {dataUser.map((user:any)=>{
                 return(
-                    <div key={user.id} onClick={()=>router.push(`/user/${user.id}`)}>
+                    <div key={user.id} onClick={()=>router.push(`/users/${user.id}`)}>
                     <p >{user.name}</p>
                     </div>
                 )
