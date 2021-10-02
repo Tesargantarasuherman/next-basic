@@ -1,5 +1,6 @@
 import Layout from '../../components/Layout';
 import {useRouter} from 'next/router';
+import styles from '../../styles/user.module.css';
 // tipe variabel props
 interface UserProps{
     dataUser: Array<any>;
@@ -14,7 +15,7 @@ const indexUsers = (props:UserProps) => {
         <Layout pageTitle="Users">
             {dataUser.map((user:any)=>{
                 return(
-                    <div key={user.id} onClick={()=>router.push(`/users/${user.id}`)}>
+                    <div key={user.id} onClick={()=>router.push(`/users/${user.id}`)} className={styles.card}>
                     <p >{user.name}</p>
                     </div>
                 )
