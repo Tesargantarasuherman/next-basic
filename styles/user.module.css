@@ -2,4 +2,6 @@
     padding: 16px;
     box-shadow: 6px 3px 13px 1px rgb(0 0 0 / 35%);
     border-radius:12px;
+    margin:12px;
+    display:inline-block;
 }
