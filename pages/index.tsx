@@ -1,15 +1,31 @@
 import Layout from '../components/Layout';
 import Cookies from "js-cookie";
 import styles from '../styles/Home.module.css'
-export default function Home (){
+
+export default function Home (props:any){
   return (
     <>
       <Layout pageTitle="Home Page">
       <div className={styles.container}>
+        <h2>{props.token}</h2><br/>
       <button type="button" onClick={()=>{
-        Cookies.set("token","ABCDEF",{expires:1/24})
+       fetch("/api/login",{
+         method:"post",
+         headers:{
+           "Content-Type":"application/json"
+         },
+         body:JSON.stringify({token:"ABCD"})
+       })
       }}>Login</button>
-      <button type="button" onClick={()=>{}}>Login</button>
+      <button type="button" onClick={()=>{
+               fetch("/api/logout",{
+                method:"post",
+                headers:{
+                  "Content-Type":"appllication/json"
+                },
+                body:JSON.stringify({})
+              })
+      }}>Logout</button>
       </div>
       </Layout >
     </>
@@ -23,6 +39,8 @@ interface parameter{
 
 export function getServerSideProps(props:parameter){
   return{
-    props:{}
+    props:{
+      token: props.req.cookies.token || ""
+    }
   }
 }
