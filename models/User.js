@@ -1,23 +1,28 @@
 const mongoose = require('mongoose');
 
-const BlogSchema = new mongoose.Schema({
-    title: {
+const UserSchema = new mongoose.Schema({
+    email: {
         type: String,
         required: [true, 'Please add a title'],
         unique: true,
-        trim: true,
-        maxlength: [40, 'Title Cannot be more than 40 characters']
+        trim: true,    
     },
-    url_image:{
-        type : String,
-        // file save to DIGITAL OCEAN
-        required: true
-    },
-    description: {
+    role: {
+        enum:["basic","admin"],
+        default:"basic",
         type: String,
-        required: true,
-        maxlength: [200, 'Description Cannot be more than 200 characters']
+        required: [true, 'Please add a role'],
     },
+    name: {
+        type: String,
+        required: [true, 'Please add a name'],
+    },
+    password:{
+        type : String,
+        required: [true, 'Please add a password'],
+    }
+    
 }, {timestamps: true})
 
-module.exports = mongoose.models.Blog || mongoose.model('Blog', BlogSchema)
+
+module.exports = mongoose.models.User || mongoose.model('User', UserSchema)
