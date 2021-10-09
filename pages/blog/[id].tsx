@@ -16,9 +16,9 @@ const blogDetail = (props:BlogDetailProps) => {
   const { id } = router.query;
   const {blog} = props;
   return (
-  <Layout pageTitle="User Detail">
-      <p>{blog.data.title}</p>
-      <p>{blog.data.description}</p>
+  <Layout pageTitle={`Blog Detail${blog.title}`}>
+      <p>{blog.title}</p>
+      <p>{blog.description}</p>
   </Layout>
   )
 };
@@ -47,7 +47,9 @@ interface _getStaticProps{
 export async function getStaticProps(context:_getStaticProps){
   const {id} = context.params;
   const res = await fetch(`http://localhost:3000/api/blog/${id}`);
-  const blog = await res.json();
+  const blog_res = await res.json();
+  const blog = blog_res.data;
+
   return{
     props:{
       blog,

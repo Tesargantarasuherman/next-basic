@@ -8,14 +8,13 @@ interface BlogProps {
 }
 const indexBlog = (props: BlogProps) => {
     const { data_blog } = props;
-    const dataBlog: [string] = data_blog.data;
     // const router = useRouter();
 
     return (
         <Layout pageTitle="Blog">
             <Grid divided='vertically' padded className={styles.card_margin_top}>
                 <Grid.Row columns={4}  >
-                    {dataBlog.map((blog: any) => {
+                    {data_blog.map((blog: any) => {
                         return (
                             <Grid.Column >
                                 <Card key={blog._id}>
@@ -52,7 +51,8 @@ const indexBlog = (props: BlogProps) => {
 // }
 export async function getStaticProps() {
     const res = await fetch('http://localhost:3000/api/blog');
-    const data_blog = await res.json();
+    const data_blog_res = await res.json();
+    const data_blog = data_blog_res.data;
     return {
         props: {
             data_blog
