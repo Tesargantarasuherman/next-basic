@@ -8,6 +8,7 @@ interface Blog {
     title: string;
     description: string;
     _id: string;
+    url_image:string
 }
 interface BlogDetailProps {
     blog: Blog;
@@ -21,7 +22,7 @@ const blogDetail = (props: BlogDetailProps) => {
             <Grid.Row columns={1}  >
                 <Grid.Column >
                     <Card key={blog._id} fluid>
-                        <Image src='https://images.unsplash.com/photo-1633114127408-af671c774b39?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80' wrapped ui={false} />
+                        <Image src={`${blog.url_image ? blog.url_image : 'https://images.unsplash.com/photo-1633783156075-a01661455344?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1632&q=80'}`} wrapped ui={false} />
                         <Card.Content>
                             <Card.Header>{blog.title}</Card.Header>
                             <Card.Meta>Joined in 2016</Card.Meta>
