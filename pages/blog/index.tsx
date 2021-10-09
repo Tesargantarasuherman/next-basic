@@ -1,5 +1,6 @@
 import Layout from "../../components/Layout";
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 
 import { Card, Icon, Image, Grid } from 'semantic-ui-react'
 import styles from './style.module.css'
@@ -8,7 +9,7 @@ interface BlogProps {
 }
 const indexBlog = (props: BlogProps) => {
     const { data_blog } = props;
-    // const router = useRouter();
+    const router = useRouter();
 
     return (
         <Layout pageTitle="Blog">
@@ -16,7 +17,7 @@ const indexBlog = (props: BlogProps) => {
                 <Grid.Row columns={4}  >
                     {data_blog.map((blog: any) => {
                         return (
-                            <Grid.Column >
+                            <Grid.Column onClick={()=>router.push(`/blog/${blog._id}`)} >
                                 <Card key={blog._id}>
                                     <Image src='https://images.unsplash.com/photo-1633114127408-af671c774b39?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80' wrapped ui={false} />
                                     <Card.Content>
