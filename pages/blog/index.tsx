@@ -2,7 +2,7 @@ import Layout from "../../components/Layout";
 import Link from 'next/link';
 
 import { Card, Icon, Image, Grid } from 'semantic-ui-react'
-
+import styles from './style.module.css'
 interface BlogProps {
     data_blog: Array<any>;
 }
@@ -13,8 +13,7 @@ const indexBlog = (props: BlogProps) => {
 
     return (
         <Layout pageTitle="Blog">
-            <Grid divided='vertically' padded>
-
+            <Grid divided='vertically' padded className={styles.card_margin_top}>
                 <Grid.Row columns={3}  >
                     {dataBlog.map((blog: any) => {
                         return (
