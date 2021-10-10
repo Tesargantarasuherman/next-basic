@@ -10,7 +10,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const password = req.body.password;
 
 
-    User.findOne({ email: req.body.email}).then(user => {
+    User.findOne({ email: email}).then(user => {
         if (!(user && bcrypt.compare(password, user.password))) {
             throw 'Username or password is incorrect';
         }
