@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
 import Link from 'next/link';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 
 import { Card, Icon, Image, Grid } from 'semantic-ui-react'
 import styles from './style.module.css'
@@ -17,9 +17,9 @@ const indexBlog = (props: BlogProps) => {
                 <Grid.Row columns={4}  >
                     {data_blog.map((blog: any) => {
                         return (
-                            <Grid.Column onClick={()=>router.push(`/blog/${blog._id}`)} >
+                            <Grid.Column onClick={() => router.push(`/blog/${blog._id}`)} >
                                 <Card key={blog._id}>
-                                    <Image src={`${blog.url_image? blog.url_image :'https://images.unsplash.com/photo-1633783156075-a01661455344?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1632&q=80'}`} wrapped ui={false} />
+                                    <Image src={`${blog.url_image ? blog.url_image : 'https://images.unsplash.com/photo-1633783156075-a01661455344?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1632&q=80'}`} wrapped ui={false} />
                                     <Card.Content>
                                         <Card.Header>{blog.title}</Card.Header>
                                         <Card.Meta>Joined in 2016</Card.Meta>
@@ -51,7 +51,12 @@ const indexBlog = (props: BlogProps) => {
 //     }
 // }
 export async function getStaticProps() {
-    const res = await fetch('http://localhost:3000/api/blog');
+    const res = await fetch('http://localhost:3000/api/blog', {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmFzaWMiLCJpYXQiOjE2MzM5NjQzMzMsImV4cCI6MTYzMzk2NzkzM30.8EGzjWSGhhhqsdWINGMgzDHbUsJmZfepd4rOd5iLe1s"
+        }
+    });
     const data_blog_res = await res.json();
     const data_blog = data_blog_res.data;
     return {
