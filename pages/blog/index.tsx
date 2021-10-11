@@ -1,6 +1,7 @@
 import Layout from "../../components/Layout";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Cookies from "js-cookie";
 
 import { Card, Icon, Image, Grid } from 'semantic-ui-react'
 import styles from './style.module.css'
@@ -10,7 +11,6 @@ interface BlogProps {
 const indexBlog = (props: BlogProps) => {
     const { data_blog } = props;
     const router = useRouter();
-
     return (
         <Layout pageTitle="Blog">
             <Grid divided='vertically' padded className={styles.card_margin_top}>
@@ -51,10 +51,11 @@ const indexBlog = (props: BlogProps) => {
 //     }
 // }
 export async function getStaticProps() {
+    const token = localStorage.getItem('token')
     const res = await fetch('http://localhost:3000/api/blog', {
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmFzaWMiLCJpYXQiOjE2MzM5NjQzMzMsImV4cCI6MTYzMzk2NzkzM30.8EGzjWSGhhhqsdWINGMgzDHbUsJmZfepd4rOd5iLe1s"
+            "Authorization": `${token}`
         }
     });
     const data_blog_res = await res.json();
@@ -65,4 +66,5 @@ export async function getStaticProps() {
         }
     }
 }
+
 export default indexBlog;
