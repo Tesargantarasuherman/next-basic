@@ -12,23 +12,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
 
     User.findOne({ email: req.body.email}).then(user => {
-        if (!(bcrypt.compareSync(req.body.password, user.password))) {
-            res.status(400).json({ success: false,message:'User or Password invalid'})
+
+        if ((!user || !bcrypt.compareSync(req.body.password, user.password))) {
+            res.status(400).json({ success: false,message:'Email or Password invalid'})
         }
-        
-        const token = jwt.sign({role:user.role},'secretValue',{expiresIn:'1h'}) 
+        else{
+            const token = jwt.sign({role:user.role},'secretValue',{expiresIn:'1h'}) 
 
-        user.token = token;
-        user.save();
-
-        return res.status(200).json({
-            success: true, data: {
-                id: user.id,
-                name: user.name,
-                token
-            }
-        })
-
+            user.token = token;
+            user.save();
+    
+            return res.status(200).json({
+                success: true, data: {
+                    id: user.id,
+                    name: user.name,
+                    token
+                }
+            })
+        }
     })
 
 }
