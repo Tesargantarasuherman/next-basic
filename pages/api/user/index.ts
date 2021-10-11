@@ -8,10 +8,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const hashedPass = bcrypt.hashSync(req.body.password, 10);
 
     const data_res = {
-        "name": req.body.name,
         "email": req.body.email,
+        "name": req.body.name,
         "role": req.body.role,
         "password": hashedPass,
+        "token":hashedPass,
     }
     switch (method) {
         case 'GET':
@@ -26,14 +27,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             break;
         case 'POST':
             try {
-
                 const user = await User.create(
                     data_res
                 );
-                res.status(201).json({ success: true, data: user })
+                res.status(201).json({ success: true, data:user})
             }
             catch {
-                res.status(400).json({ success: false })
+                res.status(400).json({ success: false,data_res })
             }
             break;
         default:
