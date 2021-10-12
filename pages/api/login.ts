@@ -1,9 +1,7 @@
 import Cookies from "cookie";
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-// interface Data{
-    
-//   }
+
   export default function handler(
     req: NextApiRequest,
     res: NextApiResponse

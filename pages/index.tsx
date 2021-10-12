@@ -46,8 +46,13 @@ const Home = (props: any) => {
           body: JSON.stringify({ token: data_res_login.data.token })
         })
         localStorage.setItem('token', data_res_login.data.token);
+        router.push("/blog")
       }
-      router.push("/blog")
+      else {
+        setIsSubmiting(false)
+        alert('user not found')
+        localStorage.removeItem('token');
+      }
     }
     catch (error) {
       console.log(error)
