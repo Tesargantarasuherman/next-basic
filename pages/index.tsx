@@ -78,10 +78,10 @@ const Home = (props: any) => {
   const validate = () => {
     let err = {};
     if (!form.email) {
-      err.email = "email reuired"
+      err.email = "email required"
     }
     if (!form.password) {
-      err.password = "password reuired"
+      err.password = "password required"
     }
     return err
   }
