@@ -2,20 +2,44 @@ import Layout from "../../components/Layout";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Cookies from "js-cookie";
-
+import { useState, useEffect } from 'react'
 import { Card, Icon, Image, Grid } from 'semantic-ui-react'
 import styles from './style.module.css'
 interface BlogProps {
     data_blog: Array<any>;
 }
 const indexBlog = (props: BlogProps) => {
-    const { data_blog } = props;
+    // const { data_blog } = props;
     const router = useRouter();
+    const [blogs, setBlogs] = useState([]);
+
+    useEffect(() => {
+        let token = localStorage.getItem("token")
+        getBlog(token);
+    }, [])
+    const getBlog = async (token: any) => {
+        try {
+            const res = await fetch('http://localhost:3000/api/blog', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `${token}`
+                }
+            });
+            const data_blog_res = await res.json();
+            const data_blog = data_blog_res.data;
+            setBlogs(data_blog)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <Layout pageTitle="Blog">
+
             <Grid divided='vertically' padded className={styles.card_margin_top}>
                 <Grid.Row columns={4}  >
-                    {data_blog.map((blog: any) => {
+                    {blogs.map((blog: any) => {
                         return (
                             <Grid.Column onClick={() => router.push(`/blog/${blog._id}`)} >
                                 <Card key={blog._id}>
@@ -44,27 +68,30 @@ const indexBlog = (props: BlogProps) => {
     );
 }
 // indexBlog.getInitialProps = async () => {
+//     const token = Cookies.get('token')
+//     console.log(token)
 //     const res = await fetch('http://localhost:3000/api/blog');
 //     const data_blog = await res.json();
 //     return {
 //         data_blog
 //     }
 // }
-export async function getStaticProps() {
-    const token = localStorage.getItem('token')
-    const res = await fetch('http://localhost:3000/api/blog', {
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `${token}`
-        }
-    });
-    const data_blog_res = await res.json();
-    const data_blog = data_blog_res.data;
-    return {
-        props: {
-            data_blog
-        }
-    }
-}
+// export async function getStaticProps() {
+//     const token = Cookies.get('token')
+//     const res = await fetch('http://localhost:3000/api/blog', {
+//         method: "GET",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Authorization": `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYmFzaWMiLCJpYXQiOjE2MzQwMTA5MjIsImV4cCI6MTYzNDAxNDUyMn0.FyoyvwLAHgncL_bqNkAV26f6TA_mPWugqWKOFHfvgII`
+//         }
+//     });
+//     const data_blog_res = await res.json();
+//     const data_blog = data_blog_res.data;
+//     return {
+//         props: {
+//             data_blog: data_blog || ''
+//         }
+//     }
+// }
 
 export default indexBlog;
