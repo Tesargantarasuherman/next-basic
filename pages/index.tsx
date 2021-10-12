@@ -16,7 +16,6 @@ const Home = (props: any) => {
     if (isSubmiting) {
       if (Object.keys(errors).length === 0) {
         submitLogin();
-        // alert('Submitting')
       }
       else {
         setIsSubmiting(false)
@@ -48,12 +47,6 @@ const Home = (props: any) => {
         })
         localStorage.setItem('token', data_res_login.data.token);
       }
-      // const data_blog = data_blog_res.data;
-      // return {
-      //     props: {
-      //         data_blog
-      //     }
-      // }
       router.push("/blog")
     }
     catch (error) {
