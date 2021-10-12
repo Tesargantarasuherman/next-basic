@@ -54,7 +54,7 @@ const Home = (props: any) => {
       //         data_blog
       //     }
       // }
-      // router.push("/")
+      router.push("/blog")
     }
     catch (error) {
       console.log(error)
