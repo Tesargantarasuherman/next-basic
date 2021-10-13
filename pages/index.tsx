@@ -4,12 +4,13 @@ import styles from '../styles/Home.module.css'
 import Link from "next/link"
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Button, Form, Loader, Segment } from 'semantic-ui-react'
+import { Button, Form, Loader, Segment, Divider, Grid, Message } from 'semantic-ui-react'
 
 const Home = (props: any) => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [isSubmiting, setIsSubmiting] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -49,8 +50,8 @@ const Home = (props: any) => {
         router.push("/blog")
       }
       else {
+        setIsLogin(false)
         setIsSubmiting(false)
-        alert('user not found')
         localStorage.removeItem('token');
       }
     }
@@ -89,18 +90,43 @@ const Home = (props: any) => {
 
       <Layout pageTitle="Home Page">
         <div className={styles.container}>
+          {
+            isLogin ? '' : (
+              <Message negative>
+                <Message.Header>Oppss...</Message.Header>
+                <p>Akun Tidak Ditemukan Atau Password Salah</p>
+              </Message>
+            )
+          }
           <div>
             {
               isSubmiting ?
                 <Loader active inline="centered" />
                 :
-                <Segment inverted>
-                  <Form inverted onSubmit={handleSubmit}>
-                    <Form.Input fluid error={errors.email ? { content: 'Please enter a email', ponting: 'below' } : null} label="Email" placeholder="email" name="email" onChange={handleChange} />
-                    <Form.Input fluid error={errors.password ? { content: 'Please enter a password', ponting: 'below' } : null} type="password" label="password" placeholder="password" name="password" onChange={handleChange} />
-                    <Button type="submit">Login</Button>
-                  </Form>
+                <Segment placeholder>
+                  <Grid columns={2} relaxed='very' stackable>
+                    <Grid.Column>
+                      <Form onSubmit={handleSubmit}>
+                        <Form.Input fluid error={errors.email ? { content: 'Please enter a email', ponting: 'below' } : null} label="Email" placeholder="email" name="email" onChange={handleChange} />
+                        <Form.Input fluid error={errors.password ? { content: 'Please enter a password', ponting: 'below' } : null} type="password" label="password" placeholder="password" name="password" onChange={handleChange} />
+                        <Button content='Login' type="submit" primary />
+                      </Form>
+                    </Grid.Column>
+
+                    <Grid.Column verticalAlign='middle'>
+                      <Button content='Sign up' icon='signup' size='big' />
+                    </Grid.Column>
+                  </Grid>
+
+                  <Divider vertical>Or</Divider>
                 </Segment>
+              // <Segment inverted>
+              //   <Form inverted onSubmit={handleSubmit}>
+              //     <Form.Input fluid error={errors.email ? { content: 'Please enter a email', ponting: 'below' } : null} label="Email" placeholder="email" name="email" onChange={handleChange} />
+              //     <Form.Input fluid error={errors.password ? { content: 'Please enter a password', ponting: 'below' } : null} type="password" label="password" placeholder="password" name="password" onChange={handleChange} />
+              //     <Button type="submit">Login</Button>
+              //   </Form>
+              // </Segment>
             }
           </div>
           {/* <h2>{props.token}</h2><br />
