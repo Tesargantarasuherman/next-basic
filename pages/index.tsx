@@ -10,16 +10,13 @@ const Home = (props: any) => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [isSubmiting, setIsSubmiting] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [open, setOpen] = useState(false)
 
   const router = useRouter();
 
   useEffect(() => {
-    setTimeout(
-      () => setIsLogin(true),
-      5000
-    );
+
     if (isSubmiting) {
       if (Object.keys(errors).length === 0) {
         submitLogin();
@@ -53,6 +50,7 @@ const Home = (props: any) => {
           body: JSON.stringify({ token: data_res_login.data.token })
         })
         localStorage.setItem('token', data_res_login.data.token);
+        setIsLogin(true)
         router.push("/blog")
       }
       else {
@@ -97,7 +95,8 @@ const Home = (props: any) => {
       <Layout pageTitle="Home Page">
         <div className={styles.container}>
           {
-            isLogin ? (
+            isLogin ?  '' :
+            (
               <div>
                 {
                   isSubmiting ?
@@ -122,7 +121,7 @@ const Home = (props: any) => {
                     </Segment>
                 }
               </div>
-            ): ''
+            )
           }
           <Modal
             closeIcon
