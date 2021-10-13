@@ -4,13 +4,15 @@ import styles from '../styles/Home.module.css'
 import Link from "next/link"
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Button, Form, Loader, Segment, Divider, Grid, Message } from 'semantic-ui-react'
+import { Button, Form, Loader, Segment, Divider, Grid, Message, Header, Icon, Modal } from 'semantic-ui-react'
 
 const Home = (props: any) => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState({});
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const [open, setOpen] = useState(false)
+
   const router = useRouter();
 
   useEffect(() => {
@@ -54,7 +56,7 @@ const Home = (props: any) => {
         router.push("/blog")
       }
       else {
-        setIsLogin(false)
+        setOpen(true)
         setIsSubmiting(false)
         localStorage.removeItem('token');
       }
@@ -94,14 +96,14 @@ const Home = (props: any) => {
 
       <Layout pageTitle="Home Page">
         <div className={styles.container}>
-          {
+          {/* {
             isLogin ? '' : (
               <Message negative>
                 <Message.Header>Oppss...</Message.Header>
                 <p>Akun Tidak Ditemukan Atau Password Salah</p>
               </Message>
             )
-          }
+          } */}
           <div>
             {
               isSubmiting ?
@@ -133,25 +135,20 @@ const Home = (props: any) => {
               // </Segment>
             }
           </div>
-          {/* <h2>{props.token}</h2><br />
-          <button type="button" onClick={() => {
-            fetch("/api/login", {
-              method: "post",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({ token: "ABCD" })
-            })
-          }}>Login</button>
-          <button type="button" onClick={() => {
-            fetch("/api/logout", {
-              method: "post",
-              headers: {
-                "Content-Type": "appllication/json"
-              },
-              body: JSON.stringify({})
-            })
-          }}>Logout</button> */}
+          <Modal
+            closeIcon
+            open={open}
+            onClose={() => setOpen(false)}
+            onOpen={() => setOpen(true)}
+          >
+            <Header icon='exclamation' content='Something Wrong' />
+            <Modal.Content>
+              <Message negative>
+                <Message.Header>Oppss...</Message.Header>
+                <p>Akun Tidak Ditemukan Atau Password Salah</p>
+              </Message>
+            </Modal.Content>
+          </Modal>
         </div>
       </Layout >
     </>
