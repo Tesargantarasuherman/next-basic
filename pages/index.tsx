@@ -51,7 +51,7 @@ const Home = (props: any) => {
         })
         localStorage.setItem('token', data_res_login.data.token);
         setIsLogin(true)
-        router.push("/blog")
+        router.push("/")
       }
       else {
         setOpen(true)
