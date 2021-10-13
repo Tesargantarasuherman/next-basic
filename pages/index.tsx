@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 import Link from "next/link"
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Button, Form, Loader } from 'semantic-ui-react'
+import { Button, Form, Loader, Segment } from 'semantic-ui-react'
 
 const Home = (props: any) => {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -86,17 +86,21 @@ const Home = (props: any) => {
 
   return (
     <>
+
       <Layout pageTitle="Home Page">
         <div className={styles.container}>
           <div>
             {
               isSubmiting ?
                 <Loader active inline="centered" />
-                : <Form onSubmit={handleSubmit}>
-                  <Form.Input fluid error={errors.email ? { content: 'Please enter a email', ponting: 'below' } : null} label="Email" placeholder="email" name="email" onChange={handleChange} />
-                  <Form.Input fluid error={errors.password ? { content: 'Please enter a password', ponting: 'below' } : null} type="password" label="password" placeholder="password" name="password" onChange={handleChange} />
-                  <Button type="submit">Login</Button>
-                </Form>
+                :
+                <Segment inverted>
+                  <Form inverted onSubmit={handleSubmit}>
+                    <Form.Input fluid error={errors.email ? { content: 'Please enter a email', ponting: 'below' } : null} label="Email" placeholder="email" name="email" onChange={handleChange} />
+                    <Form.Input fluid error={errors.password ? { content: 'Please enter a password', ponting: 'below' } : null} type="password" label="password" placeholder="password" name="password" onChange={handleChange} />
+                    <Button type="submit">Login</Button>
+                  </Form>
+                </Segment>
             }
           </div>
           {/* <h2>{props.token}</h2><br />
