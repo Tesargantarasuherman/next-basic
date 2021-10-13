@@ -14,6 +14,10 @@ const Home = (props: any) => {
   const router = useRouter();
 
   useEffect(() => {
+    setTimeout(
+      () => setIsLogin(true),
+      5000
+    );
     if (isSubmiting) {
       if (Object.keys(errors).length === 0) {
         submitLogin();
