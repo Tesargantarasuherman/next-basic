@@ -9,11 +9,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const token = req.body.token;
 
     await User.findOne({ token: token }).then(user=>{
-        const token_baru = Math.random().toString(36).substring(2, 15);
+        const token_baru = user.password;
         user.token = token_baru;
         user.save();
 
-        return res.status(400).json({ success: false,message:'Logout Success'})
+        return res.status(201).json({ success: true,message:'Logout Success'})
 
     });
 

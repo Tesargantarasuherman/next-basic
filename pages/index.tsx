@@ -97,7 +97,7 @@ const Home = (props: any) => {
       <Layout pageTitle="Home Page">
         <div className={styles.container}>
           {
-            isLogin ? '' : (
+            isLogin ? (
               <div>
                 {
                   isSubmiting ?
@@ -122,7 +122,7 @@ const Home = (props: any) => {
                     </Segment>
                 }
               </div>
-            )
+            ): ''
           }
           <Modal
             closeIcon
