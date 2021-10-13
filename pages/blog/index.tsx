@@ -39,7 +39,8 @@ const indexBlog = (props: BlogProps) => {
 
             <Grid divided='vertically' padded className={styles.card_margin_top}>
                 <Grid.Row columns={4}  >
-                    {blogs.map((blog: any) => {
+                    {blogs ?
+                    blogs.map((blog: any) => {
                         return (
                             <Grid.Column onClick={() => router.push(`/blog/${blog._id}`)} >
                                 <Card key={blog._id}>
@@ -60,7 +61,10 @@ const indexBlog = (props: BlogProps) => {
                                 </Card>
                             </Grid.Column>
                         )
-                    })}
+                    })
+                    :
+                    'Anda Belum Login'
+                    }
                 </Grid.Row>
             </Grid>
 
