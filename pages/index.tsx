@@ -96,45 +96,34 @@ const Home = (props: any) => {
 
       <Layout pageTitle="Home Page">
         <div className={styles.container}>
-          {/* {
+          {
             isLogin ? '' : (
-              <Message negative>
-                <Message.Header>Oppss...</Message.Header>
-                <p>Akun Tidak Ditemukan Atau Password Salah</p>
-              </Message>
+              <div>
+                {
+                  isSubmiting ?
+                    <Loader active inline="centered" />
+                    :
+                    <Segment placeholder>
+                      <Grid columns={2} relaxed='very' stackable>
+                        <Grid.Column>
+                          <Form onSubmit={handleSubmit}>
+                            <Form.Input fluid error={errors.email ? { content: 'Please enter a email', ponting: 'below' } : null} label="Email" placeholder="email" name="email" value={form.email} onChange={handleChange} />
+                            <Form.Input fluid error={errors.password ? { content: 'Please enter a password', ponting: 'below' } : null} type="password" label="password" placeholder="password" value={form.password} name="password" onChange={handleChange} />
+                            <Button content='Login' type="submit" primary />
+                          </Form>
+                        </Grid.Column>
+
+                        <Grid.Column verticalAlign='middle'>
+                          <Button content='Sign up' icon='signup' size='big' />
+                        </Grid.Column>
+                      </Grid>
+
+                      <Divider vertical>Or</Divider>
+                    </Segment>
+                }
+              </div>
             )
-          } */}
-          <div>
-            {
-              isSubmiting ?
-                <Loader active inline="centered" />
-                :
-                <Segment placeholder>
-                  <Grid columns={2} relaxed='very' stackable>
-                    <Grid.Column>
-                      <Form onSubmit={handleSubmit}>
-                        <Form.Input fluid error={errors.email ? { content: 'Please enter a email', ponting: 'below' } : null} label="Email" placeholder="email" name="email" value={form.email} onChange={handleChange} />
-                        <Form.Input fluid error={errors.password ? { content: 'Please enter a password', ponting: 'below' } : null} type="password" label="password" placeholder="password" value={form.password} name="password" onChange={handleChange} />
-                        <Button content='Login' type="submit" primary />
-                      </Form>
-                    </Grid.Column>
-
-                    <Grid.Column verticalAlign='middle'>
-                      <Button content='Sign up' icon='signup' size='big' />
-                    </Grid.Column>
-                  </Grid>
-
-                  <Divider vertical>Or</Divider>
-                </Segment>
-              // <Segment inverted>
-              //   <Form inverted onSubmit={handleSubmit}>
-              //     <Form.Input fluid error={errors.email ? { content: 'Please enter a email', ponting: 'below' } : null} label="Email" placeholder="email" name="email" onChange={handleChange} />
-              //     <Form.Input fluid error={errors.password ? { content: 'Please enter a password', ponting: 'below' } : null} type="password" label="password" placeholder="password" name="password" onChange={handleChange} />
-              //     <Button type="submit">Login</Button>
-              //   </Form>
-              // </Segment>
-            }
-          </div>
+          }
           <Modal
             closeIcon
             open={open}
