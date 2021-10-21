@@ -56,7 +56,7 @@ const blogDetail = (props: BlogDetailProps) => {
                         <Card.Content extra>
                             <a>
                                 <Icon name='user' />
-                                10 Friends
+                                10 Komentar
                             </a>
                         </Card.Content>
                     </Card>

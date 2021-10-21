@@ -54,8 +54,8 @@ const indexBlog = (props: BlogProps) => {
                                     </Card.Content>
                                     <Card.Content extra>
                                         <a>
-                                            <Icon name='user' />
-                                            10 Friends
+                                            <Icon name='chat' />
+                                            10 Komentar
                                         </a>
                                     </Card.Content>
                                 </Card>
