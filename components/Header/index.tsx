@@ -34,7 +34,7 @@ const Header = () => {
             <Link href="/blog"> Blog</Link>
           </li>
           <li className={styles.item}>
-            <Link href="/users">User</Link>
+            <Link href="/users">About Me</Link>
           </li>
           <li className={styles.item}>
             <Button onClick={submitLogout}>Logout</Button>
